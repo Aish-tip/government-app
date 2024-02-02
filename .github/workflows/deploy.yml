@@ -37,7 +37,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           branch: master
-          folder: www
+          folder: /www
           clean: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
