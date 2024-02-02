@@ -27,8 +27,8 @@ jobs:
     - name: Build Ionic app
       run: |
          ionic build --prod
-         mv ./www $GITHUB_WORKSPACE/dist
-      working-directory: $GITHUB_WORKSPACE
+         mv ./www /dist
+      
 
   deploy:
     runs-on: ubuntu-latest
