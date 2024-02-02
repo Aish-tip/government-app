@@ -1,0 +1,184 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <form #form="ngForm" (ngSubmit)="login(form)">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center>
+          <ion-item>
+            <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+          </ion-item>
+          <ion-button color="primary" size="large" type="submit" [disabled]="form.invalid" expand="block">Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form> -->
+  <form #form="ngForm" (ngSubmit)="register(form)" style="padding: 15px">
+    <p class="text-sm">
+      Already registered?<span>
+        <a class="nav-item nav-link ml-2" routerLink="/login">Login Up</a></span
+      >
+    </p>
+    <div class="formfields">
+      <p class="text-xs mb-1">First Name</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="fname"
+        type="name"
+        placeholder="Enter first name"
+        ngModel
+        required
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Last Name</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="lname"
+        type="name"
+        placeholder="Enter lst name"
+        ngModel
+        required
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Mobile Number</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="mobile"
+        type="number"
+        placeholder="Enter mobile number"
+        ngModel
+        required
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Email ID</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="email"
+        type="email"
+        placeholder="Enter email ID"
+        ngModel
+        required
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Username</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="username"
+        type="name"
+        placeholder="User Name"
+        ngModel
+        required
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Enter age</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="age"
+        type="age"
+        placeholder="Your age"
+        ngModel
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Gender</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="gender"
+        type="text"
+        placeholder="Your Gender"
+        ngModel
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Blood group</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="bloodgroup"
+        type="text"
+        placeholder="Blood group"
+        ngModel
+      >
+      </ion-input>
+      <p class="text-xs mb-1">Password</p>
+      <ion-input
+        class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3"
+        name="password"
+        type="password"
+        placeholder="Password"
+        ngModel
+        required
+      >
+      </ion-input>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3">
+      <ion-select
+        [(ngModel)]="selectedrole"
+        name="selectedrole"
+        placeholder="Select Role"
+      >
+        <ion-select-option value="doctor">Doctor</ion-select-option>
+        <ion-select-option value="patient">Patient</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div
+      *ngIf="selectedrole=='patient'"
+      class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3"
+    >
+      <ion-select
+        [(ngModel)]="selecteddoctor"
+        multiple="false"
+        cancelText="Cancel"
+        okText="Okay"
+        name="selecteddoctor"
+        placeholder="Select Doctor"
+      >
+        <ion-select-option
+          *ngFor="let doc of doctorList; let i=index;"
+          [value]="doc.id"
+          >{{doc.doctorName}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <div
+      *ngIf="selecteddoctor"
+      class="bg-gray-100 rounded-lg text-sm overflow-hidden mb-3 pr-3"
+    >
+      <ion-select
+        [(ngModel)]="selectedgame"
+        multiple="true"
+        cancelText="Cancel"
+        okText="Okay"
+        name="selectedgame"
+        placeholder="Select Game"
+      >
+        <ion-select-option
+          *ngFor="let game of gameList; let i=index;"
+          [value]="game.id"
+          >{{game.gameName}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <ion-button
+      mode="ios"
+      color="primary"
+      size="medium"
+      type="submit"
+      [disabled]="form.invalid"
+      expand="block"
+      >Register
+    </ion-button>
+  </form>
+</ion-content>

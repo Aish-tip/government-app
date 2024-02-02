@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div *ngIf="language">             
+      <div *ngIf="language == 'english'">                
+        <ion-title>Vehicle Tracking</ion-title>
+      </div>
+      <div *ngIf="language == 'kannada'">
+        <ion-title>ವಾಹನ ಟ್ರ್ಯಾಕಿಂಗ್</ion-title>
+      </div>
+    </div>
+    <!-- <ion-title></ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3>Location Saved</h3>
+  <img src="../../assets/beejadi.jpg" />
+  <img src="../../assets/mangaluru.jpg" />
+</ion-content>

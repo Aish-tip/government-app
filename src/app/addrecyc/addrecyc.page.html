@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div *ngIf="language">             
+      <div *ngIf="language == 'english'">                
+        <ion-title>Add Recyclable items</ion-title>
+      </div>
+      <div *ngIf="language == 'kannada'">
+        <ion-title>ಮರುಬಳಕೆ ಮಾಡಲಾಗುವುದನ್ನು ಸೇರಿಸು</ion-title>
+      </div>
+    </div>
+    <ion-title></ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="closeModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="add(form)" style="padding: 5px;">
+    <div>
+      <div class="top">
+        <!-- <p style="margin: 0px;font-weight: 500;color: #A56946;display: flex;
+align-items: center;"> <img src="../../assets/{{wst.name}}.png">{{wst.name}} </p> -->
+        <!-- <ion-input name="name" [(ngModel)]="wst.name"></ion-input> -->
+        <!-- <p style="margin: 0px;font-weight: 500;color: #A56946;">{{wst.type}} -->
+        <ion-list style="background-color: transparent;width: 100%;">
+          <ion-item>
+            <div *ngIf="language">             
+              <div *ngIf="language == 'english'">                
+                <ion-select required #c interface="action-sheet" ngModel placeholder="Select item" name="name">
+                  <ion-select-option *ngFor="let wst of wList;let i=index;" [value]="wst"> {{wst?.name}}
+                  </ion-select-option>
+                </ion-select>
+              </div>
+              <div *ngIf="language == 'kannada'">
+                <ion-select required #c interface="action-sheet" ngModel placeholder="ಆಯ್ಕೆ ಮಾಡಿ" name="name">
+                  <ion-select-option *ngFor="let wst of wList;let i=index;" [value]="wst"> {{wst?.kannadaName}}
+                  </ion-select-option>
+                </ion-select>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+        <div *ngIf="language">             
+          <div *ngIf="language == 'english'">                
+            <ion-input required name="amount" type="number" placeholder="weight"
+          style="background-color: #fff;padding-left:20px !important" ngModel>
+        </ion-input>
+          </div>
+          <div *ngIf="language == 'kannada'">
+            <ion-input required name="amount" type="number" placeholder="ತೂಕ"
+          style="background-color: #fff;padding-left:20px !important" ngModel>
+        </ion-input>
+          </div>
+        </div> 
+        <div *ngIf="language">             
+          <div *ngIf="language == 'english'">                
+            <ion-button [disabled]="form.invalid" type="submit">Add</ion-button>
+          </div>
+          <div *ngIf="language == 'kannada'">
+            <ion-button [disabled]="form.invalid" type="submit">ಸೇರಿಸು</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <ion-card style="background-color:#e3e3dd">
+    <ion-card-content>
+      <ion-card-header>
+        <p>List of items to be added</p>
+      </ion-card-header>
+      <ion-card *ngFor="let array of toaddArray;let i=index">
+        <ion-card-content style="display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;">
+          {{array.name}}
+          {{array.amount}} Kg
+          <ion-button color="danger" (click)="remove(array,i)">Remove</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="center" #fab>
+    <ion-fab-button (click)="save()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+</ion-content>

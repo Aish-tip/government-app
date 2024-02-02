@@ -1,0 +1,160 @@
+<ion-app [class.dark-theme]="dark">
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>Hi, {{ActiveUser?.AccountName}}</ion-list-header>
+          <ion-note>{{ActiveUser?.email}} </ion-note>
+          <!-- <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" (click)="homel()" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" name="home"></ion-icon>
+              <ion-label>Home</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+          <ion-item>
+            <ion-label>Kannada</ion-label>
+            <ion-toggle checked="{{MyValue}}" (ionChange)="myChange($event)" slot="end"></ion-toggle>
+          </ion-item>
+          <div *ngIf="language">
+            <div *ngIf="language == 'english'">
+              <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item routerDirection="root" [routerLink]="[p.url+ex]" lines="none" detail="false"
+                  routerLinkActive="selected">
+                  <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                  <ion-label>{{ p.title }}</ion-label>
+                </ion-item>
+              </ion-menu-toggle> -->
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="homel()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="clipboard"></ion-icon>
+                  <ion-label>Home</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="recyc()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="repeat"></ion-icon>
+                  <ion-label>Recyclables</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="nonrecyc()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="warning"></ion-icon>
+                  <ion-label>Non-Recyclables</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="camera()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="camera"></ion-icon>
+                  <ion-label>Camera</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="media()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="images"></ion-icon>
+                  <ion-label>Media</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="vehicleTrack()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="car"></ion-icon>
+                  <ion-label>Vehicle Tracking</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="settings()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="settings"></ion-icon>
+                  <ion-label>Settings</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item (click)="logout()">
+                  <ion-icon slot="start" name="power"></ion-icon>
+                  <ion-label>Log out</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of KannadaAppPages; let i = index">
+                <ion-item routerDirection="root" [routerLink]="[p.url+ex]" lines="none" detail="false"
+                  routerLinkActive="selected">
+                  <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                  <ion-label>{{ p.title }}</ion-label>
+                </ion-item>
+              </ion-menu-toggle> -->
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="homel()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="clipboard"></ion-icon>
+                  <ion-label>ಮುಖ್ಯ ಪುಟ</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="recyc()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="repeat"></ion-icon>
+                  <ion-label>ಮರುಬಳಕೆ ಮಡಲಾಗುವುದು</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="nonrecyc()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="warning"></ion-icon>
+                  <ion-label>ಮರುಬಳಕೆ ಮಾಡಲಾಗದಿರುವುದು</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="camera()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="camera"></ion-icon>
+                  <ion-label>ಕ್ಯಾಮೆರಾ</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="media()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="images"></ion-icon>
+                  <ion-label>ಮಾಧ್ಯಮ</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="vehicleTrack()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="car"></ion-icon>
+                  <ion-label>ವಾಹನ ಟ್ರ್ಯಾಕಿಂಗ್</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item routerDirection="root" (click)="settings()" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon slot="start" name="settings"></ion-icon>
+                  <ion-label>ಸಂಯೋಜನೆಗಳು</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <ion-item (click)="logout()">
+                  <ion-icon slot="start" name="power"></ion-icon>
+                  <ion-label>ಲಾಗ್ ಔಟ್</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          
+          <!-- <ion-item>
+            <ion-icon slot="start" name="moon-outline"></ion-icon>
+            <ion-label>
+              Dark Mode
+            </ion-label>
+            <ion-toggle [(ngModel)]="dark"></ion-toggle>
+          </ion-item> -->
+
+
+        </ion-list>
+
+
+        <!-- <ion-list id="labels-list">
+          <ion-list-header>Settings</ion-list-header>
+
+          <ion-item *ngFor="let label of labels" lines="none">
+        <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon> 
+        <ion-icon slot="start" [ios]="label.icon + '-outline'" [md]="label.icon + '-sharp'"></ion-icon>
+        <ion-label>{{ label.title }}</ion-label>
+        </ion-item>
+        </ion-list> -->
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

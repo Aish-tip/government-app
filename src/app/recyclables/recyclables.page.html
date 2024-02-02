@@ -1,0 +1,161 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div *ngIf="language">             
+      <div *ngIf="language == 'english'">                
+        <ion-title>Recyclables</ion-title>
+      </div>
+      <div *ngIf="language == 'kannada'">
+        <ion-title>ಮರುಬಳಕೆಯಾಗುವಾವುದು</ion-title>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher spellcheck="z-index:9999" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200"
+    (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <ion-card-content>
+      <form>
+        <div>
+          <div *ngIf="language">             
+            <div *ngIf="language == 'english'">                
+              <p>Selected District</p>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <p style="font-size: 12px;">ಆಯ್ದ ಜಿಲ್ಲೆ</p>
+            </div>
+          </div>
+          <h3 style="font-weight: bold;"> {{firstDis}} </h3>
+          <!-- <ion-list>
+            <ion-item>
+              <ion-select #d interface="action-sheet" [(ngModel)]="firstDis" placeholder="Select District"
+                (ionChange)="distfunct(d.value)" name="dis">
+                <ion-select-option *ngFor="let dis of districtList" [value]="dis"> {{dis.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list> -->
+        </div>
+        <div *ngIf="selectedValue">
+          <div *ngIf="language">             
+            <div *ngIf="language == 'english'">                
+              <p>Selected Center</p>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <p style="font-size: 12px;">ಆಯ್ದ ಕೇಂದ್ರ</p>
+            </div>
+          </div>
+          <h3 style="font-weight: bold;"> {{firstCen}} </h3>
+          <h3></h3>
+          <!-- <ion-list>
+            <ion-item>
+              <ion-select #c interface="action-sheet" [(ngModel)]="firstCen" placeholder="Select District"
+                (ionChange)="callcenter(c.value)" name="dis">
+                <ion-select-option *ngFor="let cen of center" [value]="cen"> {{cen.centerName}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list> -->
+        </div>
+      </form>
+      <span *ngIf="Panchayat?.length>0">
+        <!-- {{panchayatList}} -->
+        <div class="top">
+          <div *ngIf="language">             
+            <div *ngIf="language == 'english'">                
+              <p>Panchayats : <span>{{Panchayat}} </span> </p>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <p>ಪಂಚಾಯತ್ : <span>{{Panchayat}} </span> </p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>List of Items</ion-card-header>
+    <ion-card-content>
+      <!-- <ion-accordion-group #accordionGroup style="display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;">
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Select date {{ed}} </ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <span class="flex-1">
+              <p class="text-xs mb-1">End date</p>
+              <ion-datetime class="bg-gray-100 p-2 rounded-md text-sm" displayFormat="MMM DD, YYYY" name="edate"
+                min="2022-01-01" max="2050-12-09" (ionChange)="onDatee($event)">
+              </ion-datetime>
+            </span>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group> -->
+      <div *ngFor="let wst of wList; let i=index;" style="display: block;
+      text-align: center;
+      background-color: #e3e3dd;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 5px 15px;">
+        <div class="top">
+          <div *ngIf="language">             
+            <div *ngIf="language == 'english'">                
+              <p style="margin: 0px;font-weight: 500;color: #A56946;display: flex;
+              align-items: center;font-size: 12px;"><img src="../../assets/{{wst.name}}.png">{{wst.name}}</p>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <p style="margin: 0px;font-weight: 500;color: #A56946;display: flex;
+              align-items: center;font-size: 12px;"><img src="../../assets/{{wst.name}}.png">{{wst.kannadaName}}</p>
+            </div>
+          </div>
+          <!-- <p style="margin: 0px;font-weight: 500;color: #A56946;display: flex;
+  align-items: center;"> <img src="../../assets/{{wst.name}}.png">{{wst.name}} </p> -->
+          <p style="margin: 0px;font-weight: 500;color: #A56946;">{{wst.amount}}Kg </p>
+          <!-- <p style="margin: 0px;font-weight: 500;color: #A56946;">{{wst.type}}
+          </p> -->
+          <div *ngIf="language">             
+            <div *ngIf="language == 'english'">                
+              <p style="margin: 0px;font-weight: 500;color: #A56946;">{{wst.type}}</p>
+            </div>
+            <div *ngIf="language == 'kannada'">
+              <p style="margin: 0px;font-weight: 500;color: #A56946;">ಮರುಬಳಕೆ ಮಡಲಾಗುವುದು</p>
+            </div>
+          </div>
+
+        </div>
+
+        <span>
+          {{wst.date |date: 'dd/MM/yy'}}
+        </span>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button (click)="modal('Vimeo', fab)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <!-- <ion-fab-list side="top">
+      <ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="instagram" (click)="openSocial('Instagram', fab)">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list> -->
+  </ion-fab>
+
+
+</ion-content>
