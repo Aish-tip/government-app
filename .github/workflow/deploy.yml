@@ -25,7 +25,7 @@ jobs:
       run: npm install
 
     - name: Build Ionic app
-      run: ionic build --prod
+      run: ionic build
 
   deploy:
     runs-on: ubuntu-latest
